@@ -14,6 +14,7 @@
 		C593153721C8CC0C002F9776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C593153521C8CC0C002F9776 /* LaunchScreen.storyboard */; };
 		C593154221C8CC0C002F9776 /* SwipeMatchApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593154121C8CC0C002F9776 /* SwipeMatchApplicationTests.swift */; };
 		C593154D21C8CC0C002F9776 /* SwipeMatchApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593154C21C8CC0C002F9776 /* SwipeMatchApplicationUITests.swift */; };
+		C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593155B21C8D542002F9776 /* Anchor+ColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		C593154821C8CC0C002F9776 /* SwipeMatchApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwipeMatchApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C593154C21C8CC0C002F9776 /* SwipeMatchApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeMatchApplicationUITests.swift; sourceTree = "<group>"; };
 		C593154E21C8CC0C002F9776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C593155B21C8D542002F9776 /* Anchor+ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anchor+ColorExtensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		C593152B21C8CC0A002F9776 /* SwipeMatchApplication */ = {
 			isa = PBXGroup;
 			children = (
+				C593155A21C8D4F1002F9776 /* ExtensionFiles */,
 				C593152C21C8CC0A002F9776 /* AppDelegate.swift */,
 				C593152E21C8CC0A002F9776 /* ViewController.swift */,
 				C593153021C8CC0A002F9776 /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				C593154E21C8CC0C002F9776 /* Info.plist */,
 			);
 			path = SwipeMatchApplicationUITests;
+			sourceTree = "<group>";
+		};
+		C593155A21C8D4F1002F9776 /* ExtensionFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C593155B21C8D542002F9776 /* Anchor+ColorExtensions.swift */,
+			);
+			path = ExtensionFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */,
 				C593152F21C8CC0A002F9776 /* ViewController.swift in Sources */,
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
 			);
