@@ -13,27 +13,38 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let redView = UIView()
-        redView.backgroundColor = .red
+        let headerViews = [UIColor.gray, UIColor.lightGray, UIColor.darkGray].map { (color) -> UIView in
+            let view = UIView()
+            view.backgroundColor = color
+            return view
+        }
+     
+        let headerStackView = UIStackView(arrangedSubviews: headerViews)
+        headerStackView.distribution = .fillEqually
+        headerStackView.backgroundColor = .red
+        headerStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
+        let footerViews = [UIColor.red, UIColor.black, UIColor.green, UIColor.yellow, UIColor.lightGray].map { (bgcolor) -> UIView in
+            let view = UIView()
+            view.backgroundColor = bgcolor
+            return view
+        }
+        let footerStackView = UIStackView(arrangedSubviews: footerViews)
+        footerStackView.backgroundColor = .yellow
+        footerStackView.distribution = .fillEqually
+        footerStackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         let blueView = UIView()
         blueView.backgroundColor = .blue
         
-        let stackView = UIStackView(arrangedSubviews: [redView, blueView])
+        let stackView = UIStackView(arrangedSubviews: [headerStackView, blueView, footerStackView])
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         
         view.addSubview(stackView)
         
-        //        stackView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-        
-        // autolayout constraint
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//    NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: view.topAnchor), stackView.leftAnchor.constraint(equalTo: view.leftAnchor), stackView.rightAnchor.constraint(equalTo: view.rightAnchor), stackView.heightAnchor.constraint(equalToConstant: 200)])
-        
-        stackView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: CGSize(width: 0, height: 200) )
-        
+       stackView.fillSuperView()
+
     }
     
     
