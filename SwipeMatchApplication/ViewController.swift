@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         
         let headerViews = [UIColor.gray, UIColor.lightGray, UIColor.darkGray].map { (color) -> UIView in
             let view = UIView()
-            view.backgroundColor = color
+            view.backgroundColor = .clear
             return view
         }
      
