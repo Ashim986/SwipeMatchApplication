@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */; };
 		C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593152C21C8CC0A002F9776 /* AppDelegate.swift */; };
 		C593152F21C8CC0A002F9776 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593152E21C8CC0A002F9776 /* ViewController.swift */; };
 		C593153221C8CC0A002F9776 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C593153021C8CC0A002F9776 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlStackView.swift; sourceTree = "<group>"; };
 		C593152921C8CC0A002F9776 /* SwipeMatchApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C593152C21C8CC0A002F9776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C593152E21C8CC0A002F9776 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C55913E921D96EF300DC3049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C593152021C8CC0A002F9776 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 		C593152B21C8CC0A002F9776 /* SwipeMatchApplication */ = {
 			isa = PBXGroup;
 			children = (
+				C55913E921D96EF300DC3049 /* Views */,
 				C593155A21C8D4F1002F9776 /* ExtensionFiles */,
 				C593152C21C8CC0A002F9776 /* AppDelegate.swift */,
 				C593152E21C8CC0A002F9776 /* ViewController.swift */,
@@ -267,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */,
 				C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */,
 				C593152F21C8CC0A002F9776 /* ViewController.swift in Sources */,
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
