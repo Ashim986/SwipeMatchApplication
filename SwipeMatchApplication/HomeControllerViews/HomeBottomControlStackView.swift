@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeBottomControlStackView: UIStackView {
+class BottomControlStackView: UIStackView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
