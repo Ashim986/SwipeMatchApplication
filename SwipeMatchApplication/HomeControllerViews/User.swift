@@ -16,3 +16,4 @@ struct User {
     let imageName: String
     
 }
+
