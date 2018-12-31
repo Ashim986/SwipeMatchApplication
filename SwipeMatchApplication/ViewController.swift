@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     let footerStackView = BottomControlStackView()
     let navigationStackView = NavigationStackView()
+    var cardDeckView = CardView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +21,15 @@ class ViewController: UIViewController {
     
     //MARK:- setupViewComponents
     fileprivate func setupViews() {
-        let blueView = UIView()
-        blueView.backgroundColor = .blue
         
-        let stackView = UIStackView(arrangedSubviews: [navigationStackView, blueView, footerStackView])
+        let stackView = UIStackView(arrangedSubviews: [navigationStackView, cardDeckView, footerStackView])
         stackView.axis = .vertical
         view.addSubview(stackView)
         
         stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
+        stackView.bringSubviewToFront(cardDeckView)
     }
     
     

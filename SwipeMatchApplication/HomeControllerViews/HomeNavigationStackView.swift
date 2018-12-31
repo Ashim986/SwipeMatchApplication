@@ -31,7 +31,8 @@ class NavigationStackView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        distribution = .equalCentering
+        heightAnchor.constraint(equalToConstant: 80).isActive = true
         setupStackView()
     }
     
@@ -39,8 +40,6 @@ class NavigationStackView: UIStackView {
         [settingsButton, fireImageView, messageButton].forEach { (view) in
             addArrangedSubview(view)
         }
-        distribution = .equalCentering
-        heightAnchor.constraint(equalToConstant: 80).isActive = true
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = .init(top: 0, left: 20, bottom: 0, right: 20)
     }
