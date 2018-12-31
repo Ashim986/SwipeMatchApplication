@@ -14,22 +14,49 @@ class CardView: UIView {
     
     private let cardImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+        imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    private let informationLabel: UILabel = {
+       let label = UILabel()
+        label.text = "TEST TEST"
+        label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
+    }
+    convenience init(userDescription: NSAttributedString, imageName: String){
+        self.init()
+        informationLabel.attributedText = userDescription
+        cardImageView.image = UIImage(named: imageName)
+        
+    }
+    
+    private func setupViews(){
         layer.cornerRadius = 20
         clipsToBounds = true
         addSubview(cardImageView)
+        addSubview(informationLabel)
+        setupCostraintForLabel()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanAction))
         addGestureRecognizer(panGesture)
     }
     
-    @objc private func handlePanAction(_ gesture: UIPanGestureRecognizer){
+    private func setupCostraintForLabel(){
         
-        // roataion
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: -16, right: 0))
+        
+        
+    }
+    
+    @objc private func handlePanAction(_ gesture: UIPanGestureRecognizer){
         
         switch gesture.state {
         case .changed:
@@ -55,14 +82,14 @@ class CardView: UIView {
     
     private func handleEnded(_ gesture: UIPanGestureRecognizer){
         
-        let absoluteTranslation = abs(Int32(gesture.translation(in: nil).x))
+        let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         
-        let shouldDismissCard = CGFloat(absoluteTranslation) > threshold
+        let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             if shouldDismissCard {
                 
-                self.frame = CGRect(x: 1000, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+                self.frame = CGRect(x: 1000 * translationDirection, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
                 
             } else {
                 self.transform = .identity
@@ -70,7 +97,11 @@ class CardView: UIView {
             
         }) { (_) in
             self.transform = .identity
-            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+            if shouldDismissCard {
+                self.removeFromSuperview()
+            }
+            
+//            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
         }
         
         
