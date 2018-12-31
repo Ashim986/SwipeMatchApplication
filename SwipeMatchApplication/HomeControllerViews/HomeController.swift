@@ -30,13 +30,25 @@ class HomeController: UIViewController {
     //MARK:- setupViewComponents
     fileprivate func setupCardViews(){
         
-        homeViewManager.users?.forEach { (user) in
-            let cardView = CardView(frame: .zero)
-            cardView.cardImageView.image = homeViewManager.getUserImage(imageName: user.imageName)
-            cardView.informationLabel.attributedText = homeViewManager.getLabelInformationText(user: user)
-            cardDeckView.addSubview(cardView)
-            cardView.fillSuperView()
+        guard let userViews = homeViewManager.viewForUserModel(viewType: .userView) else {
+            return
         }
+        
+        guard let advertiseViews = homeViewManager.viewForUserModel(viewType: .advertiseView) else {
+            return
+        }
+        
+        advertiseViews.forEach { (view) in
+            cardDeckView.addSubview(view)
+            view.fillSuperView()
+        }
+        
+        userViews.forEach { (view) in
+            cardDeckView.addSubview(view)
+            view.fillSuperView()
+        }
+        
+        
     }
     
     fileprivate func setupViews() {
