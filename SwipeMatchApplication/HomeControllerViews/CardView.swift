@@ -12,17 +12,18 @@ class CardView: UIView {
     
     private let threshold: CGFloat = 100
     
-    private let cardImageView: UIImageView = {
+    let cardImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    private let informationLabel: UILabel = {
+     let informationLabel: UILabel = {
        let label = UILabel()
         label.text = "TEST TEST"
         label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         label.textColor = .white
+        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -30,12 +31,6 @@ class CardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    convenience init(userDescription: NSAttributedString, imageName: String){
-        self.init()
-        informationLabel.attributedText = userDescription
-        cardImageView.image = UIImage(named: imageName)
-        
     }
     
     private func setupViews(){

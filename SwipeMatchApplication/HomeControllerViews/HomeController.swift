@@ -10,6 +10,8 @@ import UIKit
 
 class HomeController: UIViewController {
     
+    let homeViewManager = HomeViewManager()
+    
     let users = [
         User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
         User(name: "Jane", age: 23, profession: "Teacher", imageName: "jane1")
@@ -28,15 +30,10 @@ class HomeController: UIViewController {
     //MARK:- setupViewComponents
     fileprivate func setupCardViews(){
         
-        users.forEach { (user) in
-            
-            let attributedText = NSMutableAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-            
-            attributedText.append(NSAttributedString(string: "  \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-            attributedText.append(NSAttributedString(string: "\n\(user.profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-            
-            let cardView = CardView(userDescription: attributedText , imageName: user.imageName)
-            
+        homeViewManager.users?.forEach { (user) in
+            let cardView = CardView(frame: .zero)
+            cardView.cardImageView.image = homeViewManager.getUserImage(imageName: user.imageName)
+            cardView.informationLabel.attributedText = homeViewManager.getLabelInformationText(user: user)
             cardDeckView.addSubview(cardView)
             cardView.fillSuperView()
         }
