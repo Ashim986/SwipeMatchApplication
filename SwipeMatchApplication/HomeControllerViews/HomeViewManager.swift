@@ -15,10 +15,8 @@ class HomeViewManager {
         case advertiseView
     }
     
-    var users: [User]?
-    var advertisers: [Advertise]?
-    var allignment: NSTextAlignment?
-    var attributedString: NSAttributedString?
+    private var users: [User]?
+    private var advertisers: [Advertise]?
     
     init() {
         addUserDetail()
@@ -43,8 +41,7 @@ class HomeViewManager {
         case .userView:
             let cardView = self.users?.map({ (user) -> UIView in
                 let view = CardView(frame: .zero)
-                view.cardImageView.image = getImage(for: user.imageName)
-                view.informationLabel.attributedText = getAtrributedText(for: user)
+                view.user = user
                 return view
             })
             return cardView
@@ -52,50 +49,13 @@ class HomeViewManager {
         case .advertiseView:
             let advertiseView = self.advertisers?.map({ (advertise) -> UIView in
                 let view = CardView(frame: .zero)
-                view.cardImageView.image = getImage(for: advertise.posterPhotoName)
-                view.informationLabel.attributedText = getAttrributedText(for: advertise)
-                view.informationLabel.textAlignment = .center
+                view.advertise = advertise
                 return view
             })
             
            return advertiseView
          
         }
-        
-       
     }
-    private func getAttrributedText(for advertise: Advertise) -> NSAttributedString?{
-        
-        guard  let title = advertise.title, let brandName = advertise.brandName else {
-            return nil
-        }
-        
-        let attributedString = NSMutableAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attributedString.append(NSAttributedString(string: "\n \(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-        return attributedString
-    }
-    
-    private func getAtrributedText(for user: User) -> NSAttributedString?{
-        guard  let name = user.name, let age = user.age, let profession = user.profession else {
-            return nil
-        }
-        
-        let attributedString = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-        attributedString.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
-        attributedString.append(NSAttributedString(string: "\n \(profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-        
-        return attributedString
-        
-    }
-    
-    
-    private func getImage(for imageName: String?) -> UIImage? {
-        guard let imageName = imageName else{
-            return nil
-        }
-       let image =  UIImage(named: imageName)
-       return image
-    }
-    
-    
+  
 }
