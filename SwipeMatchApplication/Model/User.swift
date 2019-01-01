@@ -13,14 +13,14 @@ struct User {
     let name: String?
     let age: Int?
     let profession: String?
-    let imageName: String?
+    let imageNames: [String]?
     
-    init(name: String?, age: Int?, profession: String?, imageName: String?) {
+    init(name: String?, age: Int?, profession: String?, imageName: [String]?) {
         
         self.name = name
         self.age = age
         self.profession = profession
-        self.imageName = imageName
+        self.imageNames = imageName
         
     }
     

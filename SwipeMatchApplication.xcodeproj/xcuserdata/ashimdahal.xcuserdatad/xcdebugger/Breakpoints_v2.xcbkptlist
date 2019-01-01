@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwipeMatchApplication/HomeControllerViews/HomeController.swift"
-            timestampString = "567997115.2424901"
+            timestampString = "568074648.207316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "setupCardViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwipeMatchApplication/HomeControllerViews/HomeController.swift"
-            timestampString = "567997115.242568"
+            timestampString = "568074648.207392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "HomeController"
             landmarkType = "3">
          </BreakpointContent>

@@ -24,8 +24,8 @@ class HomeViewManager {
     
     private func addUserDetail() {
         var users = [User]()
-        users.append(User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"))
-        users.append(User(name: "Jane", age: 18, profession: "Teacher", imageName: "jane1"))
+        users.append(User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["lady5c"]))
+        users.append(User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2","jane3"]))
         self.users = users
         
         self.advertisers = [
@@ -33,6 +33,7 @@ class HomeViewManager {
         ]
         
     }
+    
     
     func viewForUserModel(viewType: ViewType) -> [UIView]? {
         
