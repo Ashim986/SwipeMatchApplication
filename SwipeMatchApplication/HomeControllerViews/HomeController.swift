@@ -11,12 +11,6 @@ import UIKit
 class HomeController: UIViewController {
     
     let homeViewManager = HomeViewManager()
-    
-    let users = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-        User(name: "Jane", age: 23, profession: "Teacher", imageName: "jane1")
-    ]
-    
     let footerStackView = BottomControlStackView()
     let navigationStackView = NavigationStackView()
     var cardDeckView = UIView()
