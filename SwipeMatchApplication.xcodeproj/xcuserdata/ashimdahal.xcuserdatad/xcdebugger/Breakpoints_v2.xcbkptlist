@@ -77,5 +77,53 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwipeMatchApplication/HomeControllerViews/HomeNavigationStackView.swift"
+            timestampString = "568089985.803756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "NavigationStackView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.UIButton in variable initialization expression of SwipeMatchApplication.NavigationStackView.messageButton : __C.UIButton"
+                  moduleName = "SwipeMatchApplication"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashimdahal/Documents/SwipeMatchApplication/SwipeMatchApplication/HomeControllerViews/HomeNavigationStackView.swift"
+                  timestampString = "568089986.097392"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwipeMatchApplication.NavigationStackView.messageButton.getter : __C.UIButton"
+                  moduleName = "SwipeMatchApplication"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashimdahal/Documents/SwipeMatchApplication/SwipeMatchApplication/HomeControllerViews/HomeNavigationStackView.swift"
+                  timestampString = "568089986.0996701"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
