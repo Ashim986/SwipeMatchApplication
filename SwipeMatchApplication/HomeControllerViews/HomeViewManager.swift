@@ -34,26 +34,26 @@ class HomeViewManager {
         ]
     }
     
-    private func updateImageIndex(user: User?) {
+    private func updateImageIndex(imageNames: [String]?) {
         
-        guard let imageName = user?.imageNames?[imageIndex] else {
+        guard let imageName = imageNames?[imageIndex] else {
             return
         }
         let image = UIImage(named: imageName)
         imageObserable?(imageIndex, image)
     }
     
-    func advanceToNextImage(for user: User?){
-        guard let imageCount = user?.imageNames?.count else {
+    func advanceToNextImage(for imageNames: [String]?){
+        guard let imageCount = imageNames?.count else {
             return
         }
        self.imageIndex = min(imageIndex + 1, imageCount - 1)
-        updateImageIndex(user: user)
+        updateImageIndex(imageNames: imageNames)
     }
     
-    func goToPreviousImage(for user: User?) {
+    func goToPreviousImage(for imageNames: [String]?) {
       self.imageIndex = max(0, imageIndex - 1)
-        updateImageIndex(user: user)
+        updateImageIndex(imageNames: imageNames)
     }
   
     
