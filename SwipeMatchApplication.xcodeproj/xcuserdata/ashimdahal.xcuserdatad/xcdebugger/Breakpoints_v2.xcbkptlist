@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwipeMatchApplication/HomeControllerViews/HomeController.swift"
-            timestampString = "568074648.207316"
+            filePath = "SwipeMatchApplication/HomeControllerViews/HomeViewManager.swift"
+            timestampString = "568083154.279343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "setupCardViews()"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "updateImageIndex(user:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,14 +25,56 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwipeMatchApplication/HomeControllerViews/HomeController.swift"
-            timestampString = "568074648.207392"
+            filePath = "SwipeMatchApplication/HomeControllerViews/CardView.swift"
+            timestampString = "568083154.279712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "HomeController"
-            landmarkType = "3">
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "setupImageViewIndexObserver()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwipeMatchApplication.CardView.(setupImageViewIndexObserver in _4EFFD57FE19F309C4C8E26F435CFBE8D)() -&gt; ()"
+                  moduleName = "SwipeMatchApplication"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashimdahal/Documents/SampleProjectLBTA/SwipeMatchApplication/SwipeMatchApplication/HomeControllerViews/CardView.swift"
+                  timestampString = "568082552.315783"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "22">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int, Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in SwipeMatchApplication.CardView.(setupImageViewIndexObserver in _4EFFD57FE19F309C4C8E26F435CFBE8D)() -&gt; ()"
+                  moduleName = "SwipeMatchApplication"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ashimdahal/Documents/SampleProjectLBTA/SwipeMatchApplication/SwipeMatchApplication/HomeControllerViews/CardView.swift"
+                  timestampString = "568082552.318123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

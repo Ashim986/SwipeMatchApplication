@@ -14,14 +14,15 @@ class HomeViewManager {
         case userView
         case advertiseView
     }
-    
     private var users: [User]?
     private var advertisers: [Advertise]?
+    private var imageIndex = 0
+    var imageObserable: ((Int, UIImage?)->())?
     
     init() {
         addUserDetail()
     }
-    
+
     private func addUserDetail() {
         var users = [User]()
         users.append(User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["lady5c"]))
@@ -31,9 +32,30 @@ class HomeViewManager {
         self.advertisers = [
         Advertise(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster")
         ]
-        
     }
     
+    private func updateImageIndex(user: User?) {
+        
+        guard let imageName = user?.imageNames?[imageIndex] else {
+            return
+        }
+        let image = UIImage(named: imageName)
+        imageObserable?(imageIndex, image)
+    }
+    
+    func advanceToNextImage(for user: User?){
+        guard let imageCount = user?.imageNames?.count else {
+            return
+        }
+       self.imageIndex = min(imageIndex + 1, imageCount - 1)
+        updateImageIndex(user: user)
+    }
+    
+    func goToPreviousImage(for user: User?) {
+      self.imageIndex = max(0, imageIndex - 1)
+        updateImageIndex(user: user)
+    }
+  
     
     func viewForUserModel(viewType: ViewType) -> [UIView]? {
         
