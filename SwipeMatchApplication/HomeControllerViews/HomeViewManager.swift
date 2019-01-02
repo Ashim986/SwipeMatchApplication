@@ -27,6 +27,7 @@ class HomeViewManager {
         var users = [User]()
         users.append(User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["lady5c"]))
         users.append(User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2","jane3"]))
+         users.append(User(name: "Sonu", age: 25, profession: "BNS Nurning", imageName: ["sneha1", "sneha2","sneha3","sneha4","sneha5"]))
         self.users = users
         
         self.advertisers = [
