@@ -58,9 +58,16 @@ class RegistrationController: UIViewController {
         return stackView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        notificationForKeyboardDisplay()
+        keyboardDismiss()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupView(){
@@ -81,5 +88,39 @@ class RegistrationController: UIViewController {
         gradient.frame = view.bounds
     }
     
+    private func notificationForKeyboardDisplay(){
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    @objc private func handleKeyboardWillShow(notification: Notification) {
+        
+        guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let heightForStackView = registrationComponentView.frame.origin.y + registrationComponentView.frame.height
+        let bottomHeight = view.frame.height - heightForStackView
+        let paddingHeight: CGFloat = 10
+        let differenceInHeight = frame.cgRectValue.height - bottomHeight + paddingHeight
+        
+        self.view.transform = CGAffineTransform(translationX: 0, y: -differenceInHeight)
+        
+    }
+    @objc private func handleKeyWillHide(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
+            self?.view.transform = .identity
+        })
+    }
+    
+    private func keyboardDismiss(){
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc private func handleTapGesture(gesture: UITapGestureRecognizer){
+        self.view.endEditing(true)
+    }
     
 }
