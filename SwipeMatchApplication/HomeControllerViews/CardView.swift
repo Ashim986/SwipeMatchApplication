@@ -129,9 +129,9 @@ class CardView: UIView {
         let getLocation = gesture.location(in: nil)
         let shouldAdvanceToNextPhoto = getLocation.x > frame.width/2
         if shouldAdvanceToNextPhoto {
-            homeManger.advanceToNextImage(for: user)
+            homeManger.advanceToNextImage(for: user?.imageNames)
         } else {
-            homeManger.goToPreviousImage(for: user)
+            homeManger.goToPreviousImage(for: user?.imageNames)
         }
         
     }
@@ -173,7 +173,7 @@ class CardView: UIView {
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             if shouldDismissCard {
                 
-                self.frame = CGRect(x: 1000 * translationDirection, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+                self.frame = CGRect(x: 500 * translationDirection, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
                 
             } else {
                 self.transform = .identity
