@@ -13,6 +13,8 @@
 		C55913F121D9B4F200DC3049 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913F021D9B4F200DC3049 /* User.swift */; };
 		C55913F321D9D18F00DC3049 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913F221D9D18F00DC3049 /* HomeViewManager.swift */; };
 		C55913F921DAC45000DC3049 /* Advertise.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913F821DAC45000DC3049 /* Advertise.swift */; };
+		C55913FC21E1C0F300DC3049 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913FB21E1C0F300DC3049 /* RegistrationController.swift */; };
+		C55913FE21E1C2AF00DC3049 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */; };
 		C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593152C21C8CC0A002F9776 /* AppDelegate.swift */; };
 		C593152F21C8CC0A002F9776 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593152E21C8CC0A002F9776 /* HomeController.swift */; };
 		C593153221C8CC0A002F9776 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C593153021C8CC0A002F9776 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		C55913F021D9B4F200DC3049 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C55913F221D9D18F00DC3049 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C55913F821DAC45000DC3049 /* Advertise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertise.swift; sourceTree = "<group>"; };
+		C55913FB21E1C0F300DC3049 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C593152921C8CC0A002F9776 /* SwipeMatchApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C593152C21C8CC0A002F9776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C593152E21C8CC0A002F9776 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C55913FA21E1C0BE00DC3049 /* Registration  */ = {
+			isa = PBXGroup;
+			children = (
+				C55913FB21E1C0F300DC3049 /* RegistrationController.swift */,
+				C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */,
+			);
+			path = "Registration ";
+			sourceTree = "<group>";
+		};
 		C593152021C8CC0A002F9776 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				C55913F721DAC43700DC3049 /* Model */,
+				C55913FA21E1C0BE00DC3049 /* Registration  */,
 				C55913E921D96EF300DC3049 /* HomeControllerViews */,
 				C593155A21C8D4F1002F9776 /* ExtensionFiles */,
 				C593152C21C8CC0A002F9776 /* AppDelegate.swift */,
@@ -302,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */,
+				C55913FE21E1C2AF00DC3049 /* CustomTextField.swift in Sources */,
 				C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */,
 				C55913ED21D97BE100DC3049 /* HomeNavigationStackView.swift in Sources */,
 				C593152F21C8CC0A002F9776 /* HomeController.swift in Sources */,
@@ -309,6 +324,7 @@
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
 				C55913F321D9D18F00DC3049 /* HomeViewManager.swift in Sources */,
 				C55913F921DAC45000DC3049 /* Advertise.swift in Sources */,
+				C55913FC21E1C0F300DC3049 /* RegistrationController.swift in Sources */,
 				C55913F121D9B4F200DC3049 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

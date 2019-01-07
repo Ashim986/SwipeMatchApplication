@@ -19,6 +19,8 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         setupCardViews()
         setupViews()
+        navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        
     }
     
     //MARK:- setupViewComponents
@@ -27,7 +29,6 @@ class HomeController: UIViewController {
         guard let userViews = homeViewManager.viewForUserModel(viewType: .userView) else {
             return
         }
-        
         guard let advertiseViews = homeViewManager.viewForUserModel(viewType: .advertiseView) else {
             return
         }
@@ -36,16 +37,13 @@ class HomeController: UIViewController {
             cardDeckView.addSubview(view)
             view.fillSuperView()
         }
-        
         userViews.forEach { (view) in
             cardDeckView.addSubview(view)
             view.fillSuperView()
         }
-        
-        
     }
     
-    fileprivate func setupViews() {
+    private func setupViews() {
         
         let stackView = UIStackView(arrangedSubviews: [navigationStackView, cardDeckView, footerStackView])
         stackView.axis = .vertical
@@ -57,6 +55,11 @@ class HomeController: UIViewController {
         stackView.bringSubviewToFront(cardDeckView)
     }
     
+    @objc private func handleRegistration(){
+        
+        let registrationController = RegistrationController()
+        present(registrationController, animated: true, completion: nil)
+    }
     
     
 }
