@@ -10,46 +10,55 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
+    let registrationManager = RegistrationManager()
+    
+    var heightAnchorImageButton: NSLayoutConstraint?
+    var widthAnchorImageButton: NSLayoutConstraint?
     
     //MARK:- Properties Decleration
-    let userImageButton: UIButton = {
+    lazy var  userImageButton: UIButton = {
        let button = UIButton(type: .system)
         button.setTitle("Select Photo ", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         button.layer.cornerRadius = 25
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
+        heightAnchorImageButton = button.heightAnchor.constraint(equalToConstant: 275)
+        widthAnchorImageButton = button.widthAnchor.constraint(equalToConstant: 275)
         button.backgroundColor = .white
         return button
     }()
     
-    let userFullName: UITextField = {
-        let textField = CustomTextField(padding: 16)
-        textField.placeholder = "Enter full name"
-        return textField
+    lazy var userFullName: UITextField = {
+        let userTextField = CustomTextField(padding: 16)
+        userTextField.delegate = self
+        userTextField.placeholder = "Enter full name"
+        return userTextField
     }()
     
-    let emailAddress: UITextField = {
-        let textField = CustomTextField(padding: 16)
-        textField.placeholder = "Enter email"
-        textField.keyboardType = .emailAddress
-        return textField
+    lazy var emailAddress: UITextField = {
+        let emailTextField = CustomTextField(padding: 16)
+        emailTextField.delegate = self
+        emailTextField.placeholder = "Enter email"
+        emailTextField.keyboardType = .emailAddress
+        return emailTextField
     }()
     
-    let password: UITextField = {
-        let textField = CustomTextField(padding: 16)
-        textField.placeholder = "Enter password"
-        textField.isSecureTextEntry = true
-        return textField
+    lazy var password: UITextField = {
+        let passwordTextField = CustomTextField(padding: 16)
+         passwordTextField.delegate = self
+        passwordTextField.placeholder = "Enter password"
+        passwordTextField.isSecureTextEntry = true
+        return passwordTextField
     }()
     
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.layer.cornerRadius = 20
-        button.backgroundColor = #colorLiteral(red: 0.698841393, green: 0.1527147889, blue: 0.3400550485, alpha: 1)
-        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.isEnabled = false
         return button
     }()
     
@@ -73,7 +82,6 @@ class RegistrationController: UIViewController {
         userInfoStackView
         ])
         stackView.spacing = 8
-        userImageButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
         return stackView
     }()
     
@@ -85,6 +93,7 @@ class RegistrationController: UIViewController {
         setupView()
         notificationForKeyboardDisplay()
         keyboardDismiss()
+        updateRegisterButtonStatus()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -99,12 +108,31 @@ class RegistrationController: UIViewController {
         registrationComponentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+    private func updateRegisterButtonStatus(){
+    
+        registrationManager.isFormValidObserver = { [weak self] (isFormValid) in
+            self?.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self?.registerButton.backgroundColor = #colorLiteral(red: 0.698841393, green: 0.1527147889, blue: 0.3400550485, alpha: 1)
+                self?.registerButton.setTitleColor(.white, for: .normal)
+            } else {
+                self?.registerButton.backgroundColor = .lightGray
+                self?.registerButton.setTitleColor(.darkGray, for: .normal)
+            }
+            
+        }
+    }
+    
     override func viewWillLayoutSubviews() {
         gradientLayer.frame = view.bounds
         if traitCollection.verticalSizeClass == .compact {
             registrationComponentView.axis = .horizontal
+             heightAnchorImageButton?.isActive = false
+             widthAnchorImageButton?.isActive = true
         } else {
             registrationComponentView.axis = .vertical
+            heightAnchorImageButton?.isActive = true
+            widthAnchorImageButton?.isActive = false
         }
         
     }
@@ -156,3 +184,24 @@ class RegistrationController: UIViewController {
     }
     
 }
+
+extension RegistrationController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let textfieldString = textField.text, let stringRange = Range(range, in: textfieldString) {
+            let replacementString = textfieldString.replacingCharacters(in: stringRange, with: string)
+            if textField == userFullName {
+                registrationManager.updateUserInformation(replacementString, textFieldType: .userName)
+            } else if textField == emailAddress {
+                 registrationManager.updateUserInformation(replacementString, textFieldType: .email)
+            } else {
+                registrationManager.updateUserInformation(replacementString, textFieldType: .password)
+            }
+        }
+        
+        return true
+    }
+    
+}
+
