@@ -62,6 +62,7 @@ class RegistrationController: UIViewController {
         ])
         stackView.axis = .vertical
         stackView.spacing = 8
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
