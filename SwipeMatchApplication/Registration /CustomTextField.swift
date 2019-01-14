@@ -20,7 +20,7 @@ class CustomTextField: UITextField {
     
     private func setupViewParameter(){
         backgroundColor = .white
-        layer.cornerRadius = 25
+        layer.cornerRadius = 20
     }
     
     override var intrinsicContentSize: CGSize {

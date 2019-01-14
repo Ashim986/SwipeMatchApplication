@@ -10,6 +10,8 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
+    
+    //MARK:- Properties Decleration
     let userImageButton: UIButton = {
        let button = UIButton(type: .system)
         button.setTitle("Select Photo ", for: .normal)
@@ -43,22 +45,40 @@ class RegistrationController: UIViewController {
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-        button.layer.cornerRadius = 22
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.layer.cornerRadius = 20
         button.backgroundColor = #colorLiteral(red: 0.698841393, green: 0.1527147889, blue: 0.3400550485, alpha: 1)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }()
     
-    lazy var registrationComponentView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [userImageButton, userFullName, emailAddress, password, registerButton])
+    lazy var userInfoStackView: UIStackView = {
+       let stackView = UIStackView(arrangedSubviews: [
+        userFullName,
+        emailAddress,
+        password,
+        registerButton
+        ])
         stackView.axis = .vertical
         stackView.spacing = 8
         return stackView
     }()
     
+    lazy var registrationComponentView: UIStackView = {
+        
+       let stackView = UIStackView(arrangedSubviews: [
+        userImageButton,
+        userInfoStackView
+        ])
+        stackView.spacing = 8
+        userImageButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        return stackView
+    }()
     
+    var gradientLayer = CAGradientLayer()
+    
+    // Mark:- view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -70,22 +90,33 @@ class RegistrationController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK:- private functions
     private func setupView(){
         addBackgroundGradient()
         view.addSubview(registrationComponentView)
         registrationComponentView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 36, bottom: 0, right: -36))
         registrationComponentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    override func viewWillLayoutSubviews() {
+        gradientLayer.frame = view.bounds
+        if traitCollection.verticalSizeClass == .compact {
+            registrationComponentView.axis = .horizontal
+        } else {
+            registrationComponentView.axis = .vertical
+        }
         
     }
     
     private func addBackgroundGradient(){
-        let gradient = CAGradientLayer()
+       
         let topColor = #colorLiteral(red: 0.986061275, green: 0.440197885, blue: 0.3446080983, alpha: 1)
         let bottomColor = #colorLiteral(red: 0.9225010276, green: 0.1780227423, blue: 0.446115613, alpha: 1)
-        gradient.colors = [topColor.cgColor, bottomColor.cgColor]
-        gradient.locations = [0,1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.bounds
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.locations = [0,1]
+        view.layer.addSublayer(gradientLayer)
+        gradientLayer.frame = view.bounds
+        
     }
     
     private func notificationForKeyboardDisplay(){
