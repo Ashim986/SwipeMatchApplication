@@ -165,8 +165,9 @@ class RegistrationController: UIViewController {
         let paddingHeight: CGFloat = 10
         let differenceInHeight = frame.cgRectValue.height - bottomHeight + paddingHeight
         
-        self.view.transform = CGAffineTransform(translationX: 0, y: -differenceInHeight)
-        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
+            self?.view.transform = CGAffineTransform(translationX: 0, y: -differenceInHeight)
+        })
     }
     @objc private func handleKeyWillHide(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
