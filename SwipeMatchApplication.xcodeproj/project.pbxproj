@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C509013C21EC55F400A4CF02 /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509013B21EC55F400A4CF02 /* RegistrationManager.swift */; };
 		C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */; };
 		C55913ED21D97BE100DC3049 /* HomeNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */; };
 		C55913EF21D98CC400DC3049 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EE21D98CC400DC3049 /* CardView.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C509013B21EC55F400A4CF02 /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlStackView.swift; sourceTree = "<group>"; };
 		C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationStackView.swift; sourceTree = "<group>"; };
 		C55913EE21D98CC400DC3049 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				C55913FB21E1C0F300DC3049 /* RegistrationController.swift */,
 				C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */,
+				C509013B21EC55F400A4CF02 /* RegistrationManager.swift */,
 			);
 			path = "Registration ";
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				C55913ED21D97BE100DC3049 /* HomeNavigationStackView.swift in Sources */,
 				C593152F21C8CC0A002F9776 /* HomeController.swift in Sources */,
 				C55913EF21D98CC400DC3049 /* CardView.swift in Sources */,
+				C509013C21EC55F400A4CF02 /* RegistrationManager.swift in Sources */,
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
 				C55913F321D9D18F00DC3049 /* HomeViewManager.swift in Sources */,
 				C55913F921DAC45000DC3049 /* Advertise.swift in Sources */,

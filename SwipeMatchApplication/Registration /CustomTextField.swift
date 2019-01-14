@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+class CustomTextField: UITextField{
     
     let padding: CGFloat?
     
@@ -42,5 +42,5 @@ class CustomTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
+
