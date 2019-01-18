@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C509013C21EC55F400A4CF02 /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C509013B21EC55F400A4CF02 /* RegistrationManager.swift */; };
 		C509013E21EC747B00A4CF02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C509013D21EC747B00A4CF02 /* GoogleService-Info.plist */; };
+		C532FD9A21F03FFD00EAD5DD /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C532FD9921F03FFD00EAD5DD /* Bindable.swift */; };
 		C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */; };
 		C55913ED21D97BE100DC3049 /* HomeNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */; };
 		C55913EF21D98CC400DC3049 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55913EE21D98CC400DC3049 /* CardView.swift */; };
@@ -49,6 +50,7 @@
 		4BF04F440A7EEB57F9F6E33B /* Pods-SwipeMatchApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchApplication.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchApplication/Pods-SwipeMatchApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		C509013B21EC55F400A4CF02 /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		C509013D21EC747B00A4CF02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C532FD9921F03FFD00EAD5DD /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlStackView.swift; sourceTree = "<group>"; };
 		C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationStackView.swift; sourceTree = "<group>"; };
 		C55913EE21D98CC400DC3049 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C532FD9821F03FE500EAD5DD /* Common Class */ = {
+			isa = PBXGroup;
+			children = (
+				C532FD9921F03FFD00EAD5DD /* Bindable.swift */,
+			);
+			path = "Common Class";
+			sourceTree = "<group>";
+		};
 		C55913E921D96EF300DC3049 /* HomeControllerViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +184,7 @@
 		C593152B21C8CC0A002F9776 /* SwipeMatchApplication */ = {
 			isa = PBXGroup;
 			children = (
+				C532FD9821F03FE500EAD5DD /* Common Class */,
 				C55913F721DAC43700DC3049 /* Model */,
 				C55913FA21E1C0BE00DC3049 /* Registration  */,
 				C55913E921D96EF300DC3049 /* HomeControllerViews */,
@@ -436,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C532FD9A21F03FFD00EAD5DD /* Bindable.swift in Sources */,
 				C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */,
 				C55913FE21E1C2AF00DC3049 /* CustomTextField.swift in Sources */,
 				C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */,

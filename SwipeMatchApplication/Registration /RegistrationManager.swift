@@ -18,6 +18,9 @@ class RegistrationManager {
     }
     var isDataValid: Bool = false
     
+    var imageBindable = Bindable<UIImage>()
+    var isFormValidBindable = Bindable<Bool>()
+    
     var passwordText: String? {
         didSet{
             isDataComplete()
@@ -34,7 +37,7 @@ class RegistrationManager {
         }
     }
     
-    var isFormValidObserver: ((Bool)->())?
+//    var isFormValidObserver: ((Bool)->())?
     
     init() {
       
@@ -53,6 +56,6 @@ class RegistrationManager {
     
     func isDataComplete(){
          isDataValid = userNameText?.isEmpty == false && emailText?.isEmpty == false && passwordText?.isEmpty == false
-        isFormValidObserver?(isDataValid)
+        isFormValidBindable.value = isDataValid
     }
 }

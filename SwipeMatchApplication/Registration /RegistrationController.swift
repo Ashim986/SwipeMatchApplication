@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
@@ -23,6 +25,9 @@ class RegistrationController: UIViewController {
         button.layer.cornerRadius = 25
         heightAnchorImageButton = button.heightAnchor.constraint(equalToConstant: 275)
         widthAnchorImageButton = button.widthAnchor.constraint(equalToConstant: 275)
+        button.addTarget(self, action: #selector(handleImageSelection), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         button.backgroundColor = .white
         return button
     }()
@@ -58,6 +63,7 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(handleUserRegistration), for: .touchUpInside)
         button.isEnabled = false
         return button
     }()
@@ -87,18 +93,33 @@ class RegistrationController: UIViewController {
     
     var gradientLayer = CAGradientLayer()
     
-    // Mark:- view lifecycle
+    // MARK:- view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         notificationForKeyboardDisplay()
         keyboardDismiss()
-        updateRegisterButtonStatus()
+        updateRegisterButtonState()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
     }
+    
+    override func viewWillLayoutSubviews() {
+        gradientLayer.frame = view.bounds
+        if traitCollection.verticalSizeClass == .compact {
+            registrationComponentView.axis = .horizontal
+            heightAnchorImageButton?.isActive = false
+            widthAnchorImageButton?.isActive = true
+        } else {
+            registrationComponentView.axis = .vertical
+            heightAnchorImageButton?.isActive = true
+            widthAnchorImageButton?.isActive = false
+        }
+        
+    }
+   
     
     // MARK:- private functions
     private func setupView(){
@@ -108,34 +129,23 @@ class RegistrationController: UIViewController {
         registrationComponentView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    private func updateRegisterButtonStatus(){
-    
-        registrationManager.isFormValidObserver = { [weak self] (isFormValid) in
-            self?.registerButton.isEnabled = isFormValid
-            if isFormValid {
+    private func updateRegisterButtonState(){
+        
+        registrationManager.isFormValidBindable.bind { [weak self](isFormValid) in
+            self?.registerButton.isEnabled = isFormValid != nil
+            if isFormValid == true {
                 self?.registerButton.backgroundColor = #colorLiteral(red: 0.698841393, green: 0.1527147889, blue: 0.3400550485, alpha: 1)
                 self?.registerButton.setTitleColor(.white, for: .normal)
             } else {
                 self?.registerButton.backgroundColor = .lightGray
                 self?.registerButton.setTitleColor(.darkGray, for: .normal)
             }
-            
+        }
+        registrationManager.imageBindable.bind { [weak self](image) in
+            self?.userImageButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
-    
-    override func viewWillLayoutSubviews() {
-        gradientLayer.frame = view.bounds
-        if traitCollection.verticalSizeClass == .compact {
-            registrationComponentView.axis = .horizontal
-             heightAnchorImageButton?.isActive = false
-             widthAnchorImageButton?.isActive = true
-        } else {
-            registrationComponentView.axis = .vertical
-            heightAnchorImageButton?.isActive = true
-            widthAnchorImageButton?.isActive = false
-        }
-        
-    }
+
     
     private func addBackgroundGradient(){
        
@@ -151,8 +161,33 @@ class RegistrationController: UIViewController {
     private func notificationForKeyboardDisplay(){
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+    }
+    @objc private func handleUserRegistration(){
+        self.view.endEditing(true)
+        guard  let email = emailAddress.text, let password = self.password.text else {
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
+            
+            guard let result = result, error == nil else {
+                self?.showHUDWithError(error: error)
+                return
+            }
+            
+            print("Authenticated user = %@", result.user.uid)
+            
+        }
+    }
+    
+    private func showHUDWithError(error: Error?){
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed Registration"
+        hud.detailTextLabel.text = error?.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 2, animated: true)
     }
     
     @objc private func handleKeyboardWillShow(notification: Notification) {
@@ -169,7 +204,14 @@ class RegistrationController: UIViewController {
             self?.view.transform = CGAffineTransform(translationX: 0, y: -differenceInHeight)
         })
     }
-    @objc private func handleKeyWillHide(){
+    @objc private func handleImageSelection() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        view.endEditing(true)
+        present(imagePicker, animated: true)
+    }
+    
+    @objc private func handleKeyBoardWillHide(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
             self?.view.transform = .identity
         })
@@ -204,5 +246,19 @@ extension RegistrationController: UITextFieldDelegate {
         return true
     }
     
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        let image = info[.originalImage] as? UIImage
+        registrationManager.imageBindable.value = image
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
