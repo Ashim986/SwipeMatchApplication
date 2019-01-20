@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 import JGProgressHUD
 
 class RegistrationController: UIViewController {
@@ -119,8 +119,6 @@ class RegistrationController: UIViewController {
         }
         
     }
-   
-    
     // MARK:- private functions
     private func setupView(){
         addBackgroundGradient()
@@ -130,9 +128,8 @@ class RegistrationController: UIViewController {
     }
     
     private func updateRegisterButtonState(){
-        
         registrationManager.isFormValidBindable.bind { [weak self](isFormValid) in
-            self?.registerButton.isEnabled = isFormValid != nil
+            self?.registerButton.isEnabled = isFormValid ?? false
             if isFormValid == true {
                 self?.registerButton.backgroundColor = #colorLiteral(red: 0.698841393, green: 0.1527147889, blue: 0.3400550485, alpha: 1)
                 self?.registerButton.setTitleColor(.white, for: .normal)
@@ -142,11 +139,24 @@ class RegistrationController: UIViewController {
             }
         }
         registrationManager.imageBindable.bind { [weak self](image) in
+            self?.registrationManager.updateData()
             self?.userImageButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+        
+        registrationManager.isRegistring.bind { [weak self] (isRegistering) in
+            if isRegistering == true {
+                self?.registeringHUD.textLabel.text = "Register"
+                DispatchQueue.main.async {
+                    self?.registeringHUD.show(in: (self?.view)!)
+                }
+            } else {
+                DispatchQueue.main.async {
+                     self?.registeringHUD.dismiss()
+                }
+               
+            }
+        }
     }
-
-    
     private func addBackgroundGradient(){
        
         let topColor = #colorLiteral(red: 0.986061275, green: 0.440197885, blue: 0.3446080983, alpha: 1)
@@ -164,21 +174,38 @@ class RegistrationController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
+    let registeringHUD = JGProgressHUD(style: .dark)
+    
     @objc private func handleUserRegistration(){
         self.view.endEditing(true)
-        guard  let email = emailAddress.text, let password = self.password.text else {
-            return
-        }
         
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
+        registrationManager.registerUser { [weak self] (_, errorType ,error) in
             
-            guard let result = result, error == nil else {
-                self?.showHUDWithError(error: error)
+            guard let errorType = errorType else {
+                
+                print()
                 return
             }
             
-            print("Authenticated user = %@", result.user.uid)
-            
+            switch errorType {
+            case .invalidRequestData :
+               let alertController = UIAlertController.showGenericError(with : "requestData is not valid. Please include all valid data")
+               self?.present(alertController, animated: true, completion: nil)
+                return
+                
+            case .invalidResponseData:
+               let alertController =  UIAlertController.showGenericError(with : error?.localizedDescription)
+               self?.present(alertController, animated: true, completion: nil)
+                return
+                
+            case .authenticationFailed:
+                let alertController =  UIAlertController.showGenericError(with : "email and password is badly formatted or already in use. Please use another")
+                self?.present(alertController, animated: true, completion: nil)
+                return
+                
+            default:
+                return
+            }
         }
     }
     
@@ -236,16 +263,23 @@ extension RegistrationController: UITextFieldDelegate {
             let replacementString = textfieldString.replacingCharacters(in: stringRange, with: string)
             if textField == userFullName {
                 registrationManager.updateUserInformation(replacementString, textFieldType: .userName)
+                registrationManager.updateData()
             } else if textField == emailAddress {
                  registrationManager.updateUserInformation(replacementString, textFieldType: .email)
+                registrationManager.updateData()
             } else {
                 registrationManager.updateUserInformation(replacementString, textFieldType: .password)
             }
         }
-        
         return true
     }
-    
+ 
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == password {
+            textField.text = ""
+            registrationManager.updateUserInformation(textField.text, textFieldType: .password)
+        }
+    }
 }
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -253,7 +287,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         let image = info[.originalImage] as? UIImage
-        registrationManager.imageBindable.value = image
+        registrationManager.updateButton(with: image)
         dismiss(animated: true, completion: nil)
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class RegistrationManager {
@@ -18,32 +19,46 @@ class RegistrationManager {
     }
     var isDataValid: Bool = false
     
+    var isRegistring = Bindable<Bool>()
     var imageBindable = Bindable<UIImage>()
     var isFormValidBindable = Bindable<Bool>()
     
-    var passwordText: String? {
+    private var passwordText: String? {
         didSet{
-            isDataComplete()
+            updateData()
         }
     }
-    var userNameText: String?{
+    private var userNameText: String?{
         didSet{
-            isDataComplete()
+            updateData()
         }
     }
-    var emailText: String? {
+    private var emailText: String? {
         didSet{
-            isDataComplete()
+            updateData()
         }
     }
-    
-//    var isFormValidObserver: ((Bool)->())?
     
     init() {
       
     }
+    
+    func registerUser(completion: @escaping(Bool, ServiceError? ,Error?) -> Void){
+        isRegistring.value = true
+        let filename = UUID().uuidString
+        let imageData = imageBindable.value?.jpegData(compressionQuality: 0.75)
+        AddImageDataToFirebaseStorage.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, errorType, error) in
+            self?.isRegistring.value = false
+            guard let url = url, error == nil else {
+                completion(false, errorType, error)
+                return
+            }
+            print("the url for the given image is ", url)
+            completion(true, errorType ,nil)
+        }
+    }
   
-    func updateUserInformation (_ textString: String, textFieldType: TextFieldType){
+    func updateUserInformation (_ textString: String?, textFieldType: TextFieldType){
         switch textFieldType {
         case .userName:
             userNameText = textString
@@ -54,8 +69,14 @@ class RegistrationManager {
         }
     }
     
-    func isDataComplete(){
-         isDataValid = userNameText?.isEmpty == false && emailText?.isEmpty == false && passwordText?.isEmpty == false
+    func updateData(){
+//        let imageData = imageBindable.value
+//        let isUsername = userNameText?.isEmpty
+         isDataValid = emailText?.isEmpty == false && passwordText?.isEmpty == false
         isFormValidBindable.value = isDataValid
+    }
+    
+    func updateButton(with image: UIImage?) {
+        imageBindable.value = image
     }
 }
