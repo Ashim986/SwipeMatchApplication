@@ -1,5 +1,5 @@
 //
-//  AddImageDataToFirebaseStorage.swift
+//  SaveImageToFirebase.swift
 //  SwipeMatchApplication
 //
 //  Created by ashim dahal on 1/19/19.
@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct AddImageDataToFirebaseStorage {
+struct SaveImageToFirebase {
     
     static private var initialFetchCompletion: ((URL?, Error?) -> Void)?
     static private var requestQueue = OperationQueue()
@@ -25,15 +25,20 @@ struct AddImageDataToFirebaseStorage {
         self.imageData = imageData
         
         let completionOperation = BlockOperation {
-            putImageData()
+            if isLoginValid == true {
+                putImageData()
+            } else {
+                initialFetchCompletion = nil
+            }
         }
         var authOperation = [Operation]()
         let userAuthOperation =  UserAuthorizationOperation(with: email, password: password) {(result, error) in
             guard error == nil else {
+                self.isLoginValid = false
                 initialFetchCompletion?(nil, error)
                 return
             }
-            
+            self.isLoginValid = true
         }
         authOperation.append(userAuthOperation)
         completionOperation.addDependency(userAuthOperation)
@@ -46,7 +51,6 @@ struct AddImageDataToFirebaseStorage {
         guard let completion = initialFetchCompletion else {
             return
         }
-        
         let completionOperation = BlockOperation {
             downloadURL()
         }
@@ -88,7 +92,4 @@ struct AddImageDataToFirebaseStorage {
         downloadOperation.append(completionOperation)
         requestQueue.addOperations(downloadOperation, waitUntilFinished: false)
     }
-    
-    
-    
 }

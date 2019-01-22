@@ -22,5 +22,4 @@ struct Advertise {
         self.posterPhotoName = posterPhotoName
         
     }
-    
 }

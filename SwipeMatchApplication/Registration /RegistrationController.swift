@@ -181,8 +181,9 @@ class RegistrationController: UIViewController {
         
         registrationManager.registerUser { [weak self] (error) in
             guard error == nil else {
-                let alertController = UIAlertController.showGenericError(with : error?.localizedDescription)
-                self?.present(alertController, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self?.showHUDWithError(error: error)
+                }
                 return
             }
         }

@@ -47,7 +47,7 @@ class RegistrationManager {
         isRegistring.value = true
         let filename = UUID().uuidString
         let imageData = imageBindable.value?.jpegData(compressionQuality: 0.75)
-        AddImageDataToFirebaseStorage.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, error) in
+        SaveImageToFirebase.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, error) in
             self?.isRegistring.value = false
             guard let url = url, error == nil else {
                 completion(error)

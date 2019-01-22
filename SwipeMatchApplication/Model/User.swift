@@ -21,8 +21,6 @@ struct User {
         self.age = age
         self.profession = profession
         self.imageNames = imageName
-        
     }
-    
 }
 

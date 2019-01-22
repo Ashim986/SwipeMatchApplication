@@ -28,11 +28,11 @@
 		C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593155B21C8D542002F9776 /* Anchor+ColorExtensions.swift */; };
 		C5B1F6B521F3E82000CB305F /* UserAuthorizationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6B421F3E82000CB305F /* UserAuthorizationOperation.swift */; };
 		C5B1F6B721F3EBC900CB305F /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6B621F3EBC900CB305F /* AsynchronousOperation.swift */; };
-		C5B1F6B921F4027A00CB305F /* AddImageDataToFirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6B821F4027A00CB305F /* AddImageDataToFirebaseStorage.swift */; };
 		C5B1F6BB21F402D100CB305F /* AddImageDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6BA21F402D100CB305F /* AddImageDataOperation.swift */; };
 		C5B1F6BD21F4086E00CB305F /* DownloadURLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6BC21F4086E00CB305F /* DownloadURLOperation.swift */; };
 		C5B1F6BF21F432F700CB305F /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6BE21F432F700CB305F /* ServiceProtocol.swift */; };
 		C5B1F6C121F43D8400CB305F /* AlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C021F43D8400CB305F /* AlertController+Extension.swift */; };
+		C5B1F6C521F78DC600CB305F /* SaveImageToFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C421F78DC600CB305F /* SaveImageToFirebase.swift */; };
 		F61A73C5F247E2B3C0F77208 /* Pods_SwipeMatchApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,11 +82,11 @@
 		C593155B21C8D542002F9776 /* Anchor+ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anchor+ColorExtensions.swift"; sourceTree = "<group>"; };
 		C5B1F6B421F3E82000CB305F /* UserAuthorizationOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthorizationOperation.swift; sourceTree = "<group>"; };
 		C5B1F6B621F3EBC900CB305F /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
-		C5B1F6B821F4027A00CB305F /* AddImageDataToFirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageDataToFirebaseStorage.swift; sourceTree = "<group>"; };
 		C5B1F6BA21F402D100CB305F /* AddImageDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageDataOperation.swift; sourceTree = "<group>"; };
 		C5B1F6BC21F4086E00CB305F /* DownloadURLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadURLOperation.swift; sourceTree = "<group>"; };
 		C5B1F6BE21F432F700CB305F /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
 		C5B1F6C021F43D8400CB305F /* AlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertController+Extension.swift"; sourceTree = "<group>"; };
+		C5B1F6C421F78DC600CB305F /* SaveImageToFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageToFirebase.swift; sourceTree = "<group>"; };
 		EA3D6A0239C807C4B17CB9AC /* Pods-SwipeMatchApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchApplication.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchApplication/Pods-SwipeMatchApplication.release.xcconfig"; sourceTree = "<group>"; };
 		F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -264,7 +264,7 @@
 		C5B1F6C221F6E2FF00CB305F /* Helper Class */ = {
 			isa = PBXGroup;
 			children = (
-				C5B1F6B821F4027A00CB305F /* AddImageDataToFirebaseStorage.swift */,
+				C5B1F6C421F78DC600CB305F /* SaveImageToFirebase.swift */,
 			);
 			path = "Helper Class";
 			sourceTree = "<group>";
@@ -500,7 +500,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5B1F6B921F4027A00CB305F /* AddImageDataToFirebaseStorage.swift in Sources */,
 				C5B1F6B521F3E82000CB305F /* UserAuthorizationOperation.swift in Sources */,
 				C532FD9A21F03FFD00EAD5DD /* Bindable.swift in Sources */,
 				C5B1F6B721F3EBC900CB305F /* AsynchronousOperation.swift in Sources */,
@@ -512,6 +511,7 @@
 				C5B1F6BF21F432F700CB305F /* ServiceProtocol.swift in Sources */,
 				C5B1F6C121F43D8400CB305F /* AlertController+Extension.swift in Sources */,
 				C55913EF21D98CC400DC3049 /* CardView.swift in Sources */,
+				C5B1F6C521F78DC600CB305F /* SaveImageToFirebase.swift in Sources */,
 				C509013C21EC55F400A4CF02 /* RegistrationManager.swift in Sources */,
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
 				C55913F321D9D18F00DC3049 /* HomeViewManager.swift in Sources */,
