@@ -150,7 +150,6 @@
 			children = (
 				C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */,
 				C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */,
-				C55913EE21D98CC400DC3049 /* CardView.swift */,
 				C593152E21C8CC0A002F9776 /* HomeController.swift */,
 				C55913F221D9D18F00DC3049 /* HomeViewManager.swift */,
 			);
@@ -162,7 +161,6 @@
 			children = (
 				C55913F021D9B4F200DC3049 /* User.swift */,
 				C55913F821DAC45000DC3049 /* Advertise.swift */,
-				C5B1F6B821F4027A00CB305F /* AddImageDataToFirebaseStorage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				C55913FB21E1C0F300DC3049 /* RegistrationController.swift */,
-				C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */,
 				C509013B21EC55F400A4CF02 /* RegistrationManager.swift */,
 			);
 			path = "Registration ";
@@ -204,6 +201,8 @@
 			children = (
 				C5B1F6B321F3E7D300CB305F /* WebService */,
 				C532FD9821F03FE500EAD5DD /* Common Class */,
+				C5B1F6C321F6E31300CB305F /* Custom UIView */,
+				C5B1F6C221F6E2FF00CB305F /* Helper Class */,
 				C55913F721DAC43700DC3049 /* Model */,
 				C55913FA21E1C0BE00DC3049 /* Registration  */,
 				C55913E921D96EF300DC3049 /* HomeControllerViews */,
@@ -260,6 +259,23 @@
 				C5B1F6B221F3E79700CB305F /* Asynchronous Operation */,
 			);
 			path = WebService;
+			sourceTree = "<group>";
+		};
+		C5B1F6C221F6E2FF00CB305F /* Helper Class */ = {
+			isa = PBXGroup;
+			children = (
+				C5B1F6B821F4027A00CB305F /* AddImageDataToFirebaseStorage.swift */,
+			);
+			path = "Helper Class";
+			sourceTree = "<group>";
+		};
+		C5B1F6C321F6E31300CB305F /* Custom UIView */ = {
+			isa = PBXGroup;
+			children = (
+				C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */,
+				C55913EE21D98CC400DC3049 /* CardView.swift */,
+			);
+			path = "Custom UIView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

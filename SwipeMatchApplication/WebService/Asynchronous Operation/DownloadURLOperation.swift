@@ -12,25 +12,21 @@ import Firebase
 class DownloadURLOperation: AsynchronousOperation {
     
     private let filename: String?
-    private var completion: ((URL?, ServiceError? ,Error?) -> Void)?
+    private var completion: ((URL?, Error?) -> Void)?
     
-    init(with filename: String?, completion: @escaping (URL?, ServiceError? ,Error?)-> Void) {
+    init(with filename: String?, completion: @escaping (URL?, Error?)-> Void) {
         self.filename = filename
         self.completion = completion
     }
     
     override func execute() {
        guard let fileName = filename  else {
-            completion?(nil, ServiceError.invalidRequestData, nil)
+            completion?(nil, nil)
             return
         }
         let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
         ref.downloadURL {[weak self] (url, error) in
-            if error != nil {
-                self?.completion?(url, ServiceError.invalidResponseData, error)
-            } else {
-                self?.completion?(url, nil, nil)
-            }
+            self?.completion?(url, error)
             self?.finish()
         }
     }

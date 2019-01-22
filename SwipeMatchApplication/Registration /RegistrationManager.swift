@@ -43,18 +43,20 @@ class RegistrationManager {
       
     }
     
-    func registerUser(completion: @escaping(Bool, ServiceError? ,Error?) -> Void){
+    func registerUser(completion: @escaping(Error?) -> Void){
         isRegistring.value = true
         let filename = UUID().uuidString
         let imageData = imageBindable.value?.jpegData(compressionQuality: 0.75)
-        AddImageDataToFirebaseStorage.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, errorType, error) in
+        AddImageDataToFirebaseStorage.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, error) in
             self?.isRegistring.value = false
             guard let url = url, error == nil else {
-                completion(false, errorType, error)
+                completion(error)
                 return
             }
+            
             print("the url for the given image is ", url)
-            completion(true, errorType ,nil)
+            completion(nil)
+            return 
         }
     }
   
@@ -70,9 +72,9 @@ class RegistrationManager {
     }
     
     func updateData(){
-//        let imageData = imageBindable.value
-//        let isUsername = userNameText?.isEmpty
-         isDataValid = emailText?.isEmpty == false && passwordText?.isEmpty == false
+        let imageData = imageBindable.value
+        let isUsername = userNameText?.isEmpty
+         isDataValid = emailText?.isEmpty == false && passwordText?.isEmpty == false && isUsername == false && imageData != nil
         isFormValidBindable.value = isDataValid
     }
     
