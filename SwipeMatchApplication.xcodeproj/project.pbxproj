@@ -33,6 +33,7 @@
 		C5B1F6BF21F432F700CB305F /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6BE21F432F700CB305F /* ServiceProtocol.swift */; };
 		C5B1F6C121F43D8400CB305F /* AlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C021F43D8400CB305F /* AlertController+Extension.swift */; };
 		C5B1F6C521F78DC600CB305F /* SaveImageToFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C421F78DC600CB305F /* SaveImageToFirebase.swift */; };
+		C5B1F6C821F7BAD800CB305F /* FetchUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C721F7BAD800CB305F /* FetchUserData.swift */; };
 		F61A73C5F247E2B3C0F77208 /* Pods_SwipeMatchApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		C5B1F6BE21F432F700CB305F /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
 		C5B1F6C021F43D8400CB305F /* AlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertController+Extension.swift"; sourceTree = "<group>"; };
 		C5B1F6C421F78DC600CB305F /* SaveImageToFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveImageToFirebase.swift; sourceTree = "<group>"; };
+		C5B1F6C721F7BAD800CB305F /* FetchUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserData.swift; sourceTree = "<group>"; };
 		EA3D6A0239C807C4B17CB9AC /* Pods-SwipeMatchApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchApplication.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchApplication/Pods-SwipeMatchApplication.release.xcconfig"; sourceTree = "<group>"; };
 		F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -256,6 +258,7 @@
 		C5B1F6B321F3E7D300CB305F /* WebService */ = {
 			isa = PBXGroup;
 			children = (
+				C5B1F6C621F7BAB400CB305F /* FetchData */,
 				C5B1F6B221F3E79700CB305F /* Asynchronous Operation */,
 			);
 			path = WebService;
@@ -276,6 +279,14 @@
 				C55913EE21D98CC400DC3049 /* CardView.swift */,
 			);
 			path = "Custom UIView";
+			sourceTree = "<group>";
+		};
+		C5B1F6C621F7BAB400CB305F /* FetchData */ = {
+			isa = PBXGroup;
+			children = (
+				C5B1F6C721F7BAD800CB305F /* FetchUserData.swift */,
+			);
+			path = FetchData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +515,7 @@
 				C532FD9A21F03FFD00EAD5DD /* Bindable.swift in Sources */,
 				C5B1F6B721F3EBC900CB305F /* AsynchronousOperation.swift in Sources */,
 				C55913EB21D96F3A00DC3049 /* HomeBottomControlStackView.swift in Sources */,
+				C5B1F6C821F7BAD800CB305F /* FetchUserData.swift in Sources */,
 				C55913FE21E1C2AF00DC3049 /* CustomTextField.swift in Sources */,
 				C593155C21C8D542002F9776 /* Anchor+ColorExtensions.swift in Sources */,
 				C55913ED21D97BE100DC3049 /* HomeNavigationStackView.swift in Sources */,

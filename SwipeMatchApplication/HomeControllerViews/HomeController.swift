@@ -17,15 +17,14 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCardViews()
         setupViews()
+        setupCardViews()
         navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         
     }
     
     //MARK:- setupViewComponents
     fileprivate func setupCardViews(){
-        
         guard let userViews = homeViewManager.viewForUserModel(viewType: .userView) else {
             return
         }
@@ -44,7 +43,7 @@ class HomeController: UIViewController {
     }
     
     private func setupViews() {
-        
+        view.backgroundColor = .white
         let stackView = UIStackView(arrangedSubviews: [navigationStackView, cardDeckView, footerStackView])
         stackView.axis = .vertical
         view.addSubview(stackView)

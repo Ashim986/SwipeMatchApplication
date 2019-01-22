@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 
-
 class RegistrationManager {
     
     enum TextFieldType {
@@ -55,11 +54,36 @@ class RegistrationManager {
             }
             
             print("the url for the given image is ", url)
-            completion(nil)
+            self?.saveImageToFireStore(imageName: url.absoluteString, completion: completion)
             return 
         }
     }
   
+    func saveImageToFireStore(imageName: String?, completion: @escaping(Error?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        guard let name = userNameText  else {
+            return
+        }
+        
+        guard let imageName = imageName else {
+            return
+        }
+        let documentData = ["name": name , "uid" : uid, "imageName" : imageName]
+        Firestore.firestore().collection("user").addDocument(data: documentData) { (error) in
+            guard error == nil else {
+                completion(error)
+                return
+            }
+            
+            print("success")
+            completion(nil)
+        }
+        
+        
+    }
+    
     func updateUserInformation (_ textString: String?, textFieldType: TextFieldType){
         switch textFieldType {
         case .userName:

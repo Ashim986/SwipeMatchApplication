@@ -22,17 +22,19 @@ class HomeViewManager {
     init() {
         addUserDetail()
     }
-
+    
     private func addUserDetail() {
-        var users = [User]()
-        users.append(User(name: "Kelly", age: 23, profession: "Music DJ", imageName: ["lady5c"]))
-        users.append(User(name: "Jane", age: 18, profession: "Teacher", imageName: ["jane1", "jane2","jane3"]))
-         users.append(User(name: "Sonu", age: 25, profession: "BNS Nurning", imageName: ["sneha1", "sneha2","sneha3","sneha4","sneha5"]))
-        self.users = users
-        
+        fetchUserDetail()
         self.advertisers = [
-        Advertise(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster")
+            Advertise(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster")
         ]
+    }
+    
+    private func fetchUserDetail() {
+        FetchUserData.shared.fetchUserData { [weak self](users) in
+            self?.users = users
+        }
+        
     }
     
     private func updateImageIndex(imageNames: [String]?) {
@@ -48,15 +50,15 @@ class HomeViewManager {
         guard let imageCount = imageNames?.count else {
             return
         }
-       self.imageIndex = min(imageIndex + 1, imageCount - 1)
+        self.imageIndex = min(imageIndex + 1, imageCount - 1)
         updateImageIndex(imageNames: imageNames)
     }
     
     func goToPreviousImage(for imageNames: [String]?) {
-      self.imageIndex = max(0, imageIndex - 1)
+        self.imageIndex = max(0, imageIndex - 1)
         updateImageIndex(imageNames: imageNames)
     }
-  
+    
     
     func viewForUserModel(viewType: ViewType) -> [UIView]? {
         
@@ -69,7 +71,7 @@ class HomeViewManager {
                 return view
             })
             return cardView
-          
+            
         case .advertiseView:
             let advertiseView = self.advertisers?.map({ (advertise) -> UIView in
                 let view = CardView(frame: .zero)
@@ -77,9 +79,9 @@ class HomeViewManager {
                 return view
             })
             
-           return advertiseView
-         
+            return advertiseView
+            
         }
     }
-  
+    
 }

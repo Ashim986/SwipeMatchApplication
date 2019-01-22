@@ -12,12 +12,12 @@ class CardView: UIView {
     
     var user: User? {
         didSet {
-            if let imageName = user?.imageNames?.first, let name = user?.name, let age = user?.age, let profession = user?.profession {
+            if let imageName = user?.imageNames, let name = user?.name, let age = user?.age, let profession = user?.profession {
                 let attributedString = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
                 attributedString.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
                 attributedString.append(NSAttributedString(string: "\n \(profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
                 
-                cardImageView.image = UIImage(named: imageName)
+                cardImageView.image = UIImage(named: imageName.first ?? "")
                 informationLabel.attributedText = attributedString
                 user?.imageNames?.forEach({ (_) in
                     let barView = UIView()
