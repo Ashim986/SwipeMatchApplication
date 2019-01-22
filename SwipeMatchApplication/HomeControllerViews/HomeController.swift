@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class HomeController: UIViewController {
     
@@ -18,10 +19,26 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        fetchUserCards()
         setupCardViews()
         navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         
     }
+    
+    private func fetchUserCards(){
+        homeViewManager.fetchUserDetail {[unowned self](error) in
+            guard error == nil else {
+                DispatchQueue.main.async {
+                 let errorHud = JGProgressHUD.showErrorHUD(error: error)
+                    errorHud.show(in: self.view)
+                }
+                return
+            }
+        }
+        
+        
+    }
+    
     
     //MARK:- setupViewComponents
     fileprivate func setupCardViews(){

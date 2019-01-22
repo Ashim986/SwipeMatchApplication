@@ -9,50 +9,20 @@
 import Foundation
 import Firebase
 
-class FetchUserData: NSObject {
+struct FetchUserData {
     
-    static let shared = FetchUserData()
-    
-    func fetchUserData(completion: @escaping([User]?)-> Void){
-    
-        
-        let jsonData = """
-[{
-"name": "Sneha",
-"age": 21,
-"profession": "Nurse",
-"imageUrl": "this is image url",
-"uid": "asdafjthis is uid",
-"imageNames": ["sneha1", "sneha2","sneha3","sneha4","sneha5"]
-},
-{
-"name": "Jane",
-"age": 18,
-"profession": "Music DJ",
-"imageUrl": "this is image url",
-"uid": "asdafjthis is uid",
-"imageNames": ["jane1", "jane2","jane3"]
-},
-{
-"name": "Kelly",
-"age": 23,
-"profession": "Teacher",
-"imageUrl": "this is image url",
-"uid": "asdafjthis is uid",
-"imageNames": ["lady5c"]
-}]
-""".data(using: .utf8)!
-        
-        
-        do {
-            let docoder = JSONDecoder()
-            let users =  try? docoder.decode([User].self, from: jsonData)
-            completion(users)
-        } catch let JSONErr{
-            print(JSONErr)
-            completion(nil)
+    static func fetchUserData(completion: @escaping([User]?, Error?)-> Void){
+        Firestore.firestore().collection("user").getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot, error == nil else {
+                completion(nil, error)
+                return
+            }
+            var users = [User]()
+            snapshot.documents.forEach({ (documentSnapshot) in
+                let userDictionary =  documentSnapshot.data()
+                users.append(User(dictionary: userDictionary))
+            })
+            completion(users, nil)
         }
-        
-        
     }
 }

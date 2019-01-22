@@ -20,21 +20,24 @@ class HomeViewManager {
     var imageObserable: ((Int, UIImage?)->())?
     
     init() {
-        addUserDetail()
+       // addUserDetail()
     }
     
-    private func addUserDetail() {
-        fetchUserDetail()
-        self.advertisers = [
-            Advertise(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster")
-        ]
-    }
+//    private func addUserDetail() {
+//        fetchUserDetail()
+//        self.advertisers = [
+//            Advertise(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster")
+//        ]
+//    }
     
-    private func fetchUserDetail() {
-        FetchUserData.shared.fetchUserData { [weak self](users) in
-            self?.users = users
+    func fetchUserDetail(completion : @escaping(Error?) -> Void) {
+        FetchUserData.fetchUserData { (users, error) in
+            guard let users = users, error == nil else {
+                completion(error)
+                return
+            }
+            self.users = users
         }
-        
     }
     
     private func updateImageIndex(imageNames: [String]?) {

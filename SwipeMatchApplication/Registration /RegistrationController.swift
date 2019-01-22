@@ -179,23 +179,17 @@ class RegistrationController: UIViewController {
     @objc private func handleUserRegistration(){
         self.view.endEditing(true)
         
-        registrationManager.registerUser { [weak self] (error) in
+        registrationManager.registerUser { [unowned self] (error) in
             guard error == nil else {
                 DispatchQueue.main.async {
-                    self?.showHUDWithError(error: error)
+                    let errorHud = JGProgressHUD.showErrorHUD(error: error)
+                    errorHud.show(in: self.view)
                 }
                 return
             }
         }
     }
     
-    private func showHUDWithError(error: Error?){
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Failed Registration"
-        hud.detailTextLabel.text = error?.localizedDescription
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 2, animated: true)
-    }
     
     @objc private func handleKeyboardWillShow(notification: Notification) {
         
