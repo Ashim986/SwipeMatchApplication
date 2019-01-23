@@ -24,9 +24,10 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         fetchUserCards()
         self.setupViews()
-        navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        navigationStackView.settingsButton.addTarget(self, action: #selector(handleSetting), for: .touchUpInside)
         
     }
+    
     let activityHud = JGProgressHUD.loading()
     
     private func fetchUserCards(){
@@ -80,10 +81,11 @@ class HomeController: UIViewController {
         stackView.bringSubviewToFront(cardDeckView)
     }
     
-    @objc private func handleRegistration(){
+    @objc private func handleSetting(){
         
-        let registrationController = RegistrationController()
-        present(registrationController, animated: true, completion: nil)
+        let registrationController = SettingViewController()
+        let navController = UINavigationController(rootViewController: registrationController)
+        present(navController, animated: true, completion: nil)
     }
 }
 
@@ -92,6 +94,4 @@ extension HomeController: BottomControlStackViewDelegate {
     func didTapRefreshButton() {
        fetchUserCards()
     }
-    
-    
 }
