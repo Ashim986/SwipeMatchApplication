@@ -18,25 +18,27 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
         fetchUserCards()
-        setupCardViews()
+        self.setupViews()
         navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         
     }
-    
+    let activityHud = JGProgressHUD(style: .dark)
     private func fetchUserCards(){
-        homeViewManager.fetchUserDetail {[unowned self](error) in
-            guard error == nil else {
+        activityHud.show(in: self.view)
+        homeViewManager.fetchUserDetail {[unowned self](error, isSuccess) in
+            
+            if isSuccess {
+                self.activityHud.dismiss()
+                self.setupCardViews()
+            } else {
+                self.activityHud.dismiss()
                 DispatchQueue.main.async {
-                 let errorHud = JGProgressHUD.showErrorHUD(error: error)
+                    let errorHud = JGProgressHUD.showErrorHUD(error: error)
                     errorHud.show(in: self.view)
                 }
-                return
             }
         }
-        
-        
     }
     
     
@@ -45,18 +47,20 @@ class HomeController: UIViewController {
         guard let userViews = homeViewManager.viewForUserModel(viewType: .userView) else {
             return
         }
-        guard let advertiseViews = homeViewManager.viewForUserModel(viewType: .advertiseView) else {
-            return
-        }
-        
-        advertiseViews.forEach { (view) in
-            cardDeckView.addSubview(view)
-            view.fillSuperView()
-        }
         userViews.forEach { (view) in
             cardDeckView.addSubview(view)
             view.fillSuperView()
         }
+        
+        guard let advertiseViews = homeViewManager.viewForUserModel(viewType: .advertiseView) else {
+            return
+        }
+        advertiseViews.forEach { (view) in
+            cardDeckView.addSubview(view)
+            view.fillSuperView()
+        }
+        
+        
     }
     
     private func setupViews() {

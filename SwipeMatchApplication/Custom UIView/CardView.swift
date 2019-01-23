@@ -7,25 +7,32 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
     var user: User? {
         didSet {
-            if let imageName = user?.imageNames, let name = user?.name, let age = user?.age, let profession = user?.profession {
-                let attributedString = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-                attributedString.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
-                attributedString.append(NSAttributedString(string: "\n \(profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-                
-                cardImageView.image = UIImage(named: imageName.first ?? "")
-                informationLabel.attributedText = attributedString
-                user?.imageNames?.forEach({ (_) in
-                    let barView = UIView()
-                    barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
-                    barStackView.addArrangedSubview(barView)
-                })
-                setupImageViewIndexObserver()
+            guard let imageURLString = user?.imageUrl, let name = user?.name else {
+                return
             }
+            
+            let stringAge = user?.age != nil ? "\(user?.age ?? 0)" : "N/A"
+            let profession = user?.profession ?? "Not Available"
+            let attributedString = NSMutableAttributedString(string: name, attributes: [.font : UIFont.systemFont(ofSize: 32, weight: .heavy)])
+            attributedString.append(NSAttributedString(string:" \(stringAge)",
+                attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
+            attributedString.append(NSAttributedString(string: "\n \(profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
+            let urlString = URL(string: imageURLString)
+            cardImageView.sd_setImage(with: urlString)
+            informationLabel.attributedText = attributedString
+            
+            user?.imageNames?.forEach({ (_) in
+                let barView = UIView()
+                barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
+                barStackView.addArrangedSubview(barView)
+            })
+            setupImageViewIndexObserver()
         }
     }
     
@@ -81,7 +88,7 @@ class CardView: UIView {
         super.init(frame: frame)
         setupViews()
     }
-
+    
     private func setupViews(){
         layer.cornerRadius = 20
         clipsToBounds = true

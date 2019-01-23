@@ -30,13 +30,14 @@ class HomeViewManager {
 //        ]
 //    }
     
-    func fetchUserDetail(completion : @escaping(Error?) -> Void) {
+    func fetchUserDetail(completion : @escaping(Error?, Bool) -> Void) {
         FetchUserData.fetchUserData { (users, error) in
             guard let users = users, error == nil else {
-                completion(error)
+                completion(error, false)
                 return
             }
             self.users = users
+            completion(nil, true)
         }
     }
     
