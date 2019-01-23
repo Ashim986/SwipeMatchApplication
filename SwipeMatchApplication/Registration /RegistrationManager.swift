@@ -38,10 +38,6 @@ class RegistrationManager {
         }
     }
     
-    init() {
-      
-    }
-    
     func registerUser(completion: @escaping(Error?) -> Void){
         isRegistring.value = true
         let filename = UUID().uuidString
@@ -52,35 +48,25 @@ class RegistrationManager {
                 completion(error)
                 return
             }
-            
-            print("the url for the given image is ", url)
-            self?.saveImageToFireStore(imageUrl: url.absoluteString, completion: completion)
+         
+            self?.saveImageToFireStore(imageURL: url.absoluteString, completion: completion)
             return 
         }
     }
   
-    func saveImageToFireStore(imageUrl: String?, completion: @escaping(Error?) -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else {
+    func saveImageToFireStore(imageURL: String?, completion: @escaping(Error?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid, let name = userNameText, let imageURL = imageURL else {
             return
         }
-        guard let name = userNameText  else {
-            return
-        }
-        
-        guard let imageUrl = imageUrl else {
-            return
-        }
-        let documentData = ["name": name , "uid": uid, "imageUrl": imageUrl ]
+      
+        let documentData = ["name": name , "uid": uid, "imageUrl": imageURL ]
         Firestore.firestore().collection("user").addDocument(data: documentData) { (error) in
             guard error == nil else {
                 completion(error)
                 return
             }
-            
-            print("success")
             completion(nil)
         }
-        
         
     }
     

@@ -24,6 +24,7 @@ class CardView: UIView {
                 attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
             attributedString.append(NSAttributedString(string: "\n \(profession)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .light)]))
             let urlString = URL(string: imageURLString)
+            
             cardImageView.sd_setImage(with: urlString)
             informationLabel.attributedText = attributedString
             

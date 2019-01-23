@@ -12,7 +12,11 @@ import JGProgressHUD
 class HomeController: UIViewController {
     
     let homeViewManager = HomeViewManager()
-    let footerStackView = BottomControlStackView()
+    lazy var footerStackView: BottomControlStackView = {
+       let stackView = BottomControlStackView()
+        stackView.delegate = self
+        return stackView
+    }()
     let navigationStackView = NavigationStackView()
     var cardDeckView = UIView()
     
@@ -23,9 +27,12 @@ class HomeController: UIViewController {
         navigationStackView.settingsButton.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
         
     }
-    let activityHud = JGProgressHUD(style: .dark)
+    let activityHud = JGProgressHUD.loading()
+    
     private func fetchUserCards(){
-        activityHud.show(in: self.view)
+        DispatchQueue.main.async { [unowned self] in
+            self.activityHud.show(in: self.view)
+        }
         homeViewManager.fetchUserDetail {[unowned self](error, isSuccess) in
             
             if isSuccess {
@@ -59,8 +66,6 @@ class HomeController: UIViewController {
             cardDeckView.addSubview(view)
             view.fillSuperView()
         }
-        
-        
     }
     
     private func setupViews() {
@@ -80,7 +85,13 @@ class HomeController: UIViewController {
         let registrationController = RegistrationController()
         present(registrationController, animated: true, completion: nil)
     }
+}
+
+
+extension HomeController: BottomControlStackViewDelegate {
+    func didTapRefreshButton() {
+       fetchUserCards()
+    }
     
     
 }
-

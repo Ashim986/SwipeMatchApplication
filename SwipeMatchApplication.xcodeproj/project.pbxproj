@@ -149,15 +149,16 @@
 			path = "Common Class";
 			sourceTree = "<group>";
 		};
-		C55913E921D96EF300DC3049 /* HomeControllerViews */ = {
+		C55913E921D96EF300DC3049 /* HomeController */ = {
 			isa = PBXGroup;
 			children = (
+				C55913EE21D98CC400DC3049 /* CardView.swift */,
 				C55913EA21D96F3A00DC3049 /* HomeBottomControlStackView.swift */,
 				C55913EC21D97BE100DC3049 /* HomeNavigationStackView.swift */,
 				C593152E21C8CC0A002F9776 /* HomeController.swift */,
 				C55913F221D9D18F00DC3049 /* HomeViewManager.swift */,
 			);
-			path = HomeControllerViews;
+			path = HomeController;
 			sourceTree = "<group>";
 		};
 		C55913F721DAC43700DC3049 /* Model */ = {
@@ -209,7 +210,8 @@
 				C5B1F6C221F6E2FF00CB305F /* Helper Class */,
 				C55913F721DAC43700DC3049 /* Model */,
 				C55913FA21E1C0BE00DC3049 /* Registration  */,
-				C55913E921D96EF300DC3049 /* HomeControllerViews */,
+				C5B1F6CB21F8337900CB305F /* SettingController */,
+				C55913E921D96EF300DC3049 /* HomeController */,
 				C593155A21C8D4F1002F9776 /* ExtensionFiles */,
 				C593152C21C8CC0A002F9776 /* AppDelegate.swift */,
 				C593153021C8CC0A002F9776 /* Main.storyboard */,
@@ -279,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				C55913FD21E1C2AF00DC3049 /* CustomTextField.swift */,
-				C55913EE21D98CC400DC3049 /* CardView.swift */,
 			);
 			path = "Custom UIView";
 			sourceTree = "<group>";
@@ -290,6 +291,13 @@
 				C5B1F6C721F7BAD800CB305F /* FetchUserData.swift */,
 			);
 			path = FetchData;
+			sourceTree = "<group>";
+		};
+		C5B1F6CB21F8337900CB305F /* SettingController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

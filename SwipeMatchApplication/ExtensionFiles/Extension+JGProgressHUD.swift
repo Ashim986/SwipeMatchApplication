@@ -10,11 +10,18 @@ import Foundation
 import JGProgressHUD
 
 extension JGProgressHUD {
+    
     static func showErrorHUD(error: Error?) -> JGProgressHUD {
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed Registration"
         hud.detailTextLabel.text = error?.localizedDescription
         hud.dismiss(afterDelay: 2, animated: true)
+        return hud
+    }
+    
+    static func loading() -> JGProgressHUD {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading"
         return hud
     }
     
