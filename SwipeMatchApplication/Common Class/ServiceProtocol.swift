@@ -8,16 +8,6 @@
 
 import Foundation
 
-enum ServiceError: Error {
-    case invalidURL
-    case authenticationFailed
-    case invalidRequestData
-    case noResponseData
-    case noObjectsReturned
-    case invalidResponseData
-    case unknown
-}
-
 protocol Service {
     
 }

@@ -14,9 +14,9 @@ class UserAuthorizationOperation: AsynchronousOperation {
     let email: String?
     let password: String?
     
-    private var completion: ((AuthDataResult?, ServiceError?, Error?) -> Void)?
+    private var completion: ((AuthDataResult?, Error?) -> Void)?
     
-    init(with email: String?, password: String? ,completion: @escaping (AuthDataResult?, ServiceError?, Error?)-> Void) {
+    init(with email: String?, password: String? ,completion: @escaping (AuthDataResult?, Error?)-> Void) {
         self.email = email
         self.password = password
         self.completion = completion
@@ -24,15 +24,11 @@ class UserAuthorizationOperation: AsynchronousOperation {
     
     override func execute() {
         guard let email = email, let password = password else {
-            completion?(nil, ServiceError.invalidRequestData, nil)
+            completion?(nil, nil)
             return
         }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
-            if error != nil {
-                self?.completion?(authResult, ServiceError.invalidResponseData, error)
-            } else {
-                self?.completion?(authResult, nil, nil)
-            }
+            self?.completion?(authResult, error)
             self?.finish()
         }
     }

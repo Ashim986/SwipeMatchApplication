@@ -15,12 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    override init() {
+        super.init()
+        FirebaseApp.configure()
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = RegistrationController()
+        window?.rootViewController = HomeController()
         
         
         return true

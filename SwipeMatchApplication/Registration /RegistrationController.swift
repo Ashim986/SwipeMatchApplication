@@ -179,43 +179,17 @@ class RegistrationController: UIViewController {
     @objc private func handleUserRegistration(){
         self.view.endEditing(true)
         
-        registrationManager.registerUser { [weak self] (_, errorType ,error) in
-            
-            guard let errorType = errorType else {
-                
-                print()
-                return
-            }
-            
-            switch errorType {
-            case .invalidRequestData :
-               let alertController = UIAlertController.showGenericError(with : "requestData is not valid. Please include all valid data")
-               self?.present(alertController, animated: true, completion: nil)
-                return
-                
-            case .invalidResponseData:
-               let alertController =  UIAlertController.showGenericError(with : error?.localizedDescription)
-               self?.present(alertController, animated: true, completion: nil)
-                return
-                
-            case .authenticationFailed:
-                let alertController =  UIAlertController.showGenericError(with : "email and password is badly formatted or already in use. Please use another")
-                self?.present(alertController, animated: true, completion: nil)
-                return
-                
-            default:
+        registrationManager.registerUser { [unowned self] (error) in
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    let errorHud = JGProgressHUD.showErrorHUD(error: error)
+                    errorHud.show(in: self.view)
+                }
                 return
             }
         }
     }
     
-    private func showHUDWithError(error: Error?){
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Failed Registration"
-        hud.detailTextLabel.text = error?.localizedDescription
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 2, animated: true)
-    }
     
     @objc private func handleKeyboardWillShow(notification: Notification) {
         

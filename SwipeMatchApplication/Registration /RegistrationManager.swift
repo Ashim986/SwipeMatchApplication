@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 
-
 class RegistrationManager {
     
     enum TextFieldType {
@@ -43,21 +42,48 @@ class RegistrationManager {
       
     }
     
-    func registerUser(completion: @escaping(Bool, ServiceError? ,Error?) -> Void){
+    func registerUser(completion: @escaping(Error?) -> Void){
         isRegistring.value = true
         let filename = UUID().uuidString
         let imageData = imageBindable.value?.jpegData(compressionQuality: 0.75)
-        AddImageDataToFirebaseStorage.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, errorType, error) in
+        SaveImageToFirebase.userData(with: emailText, passwordText, imageData ,and: filename) { [weak self] (url, error) in
             self?.isRegistring.value = false
             guard let url = url, error == nil else {
-                completion(false, errorType, error)
+                completion(error)
                 return
             }
+            
             print("the url for the given image is ", url)
-            completion(true, errorType ,nil)
+            self?.saveImageToFireStore(imageUrl: url.absoluteString, completion: completion)
+            return 
         }
     }
   
+    func saveImageToFireStore(imageUrl: String?, completion: @escaping(Error?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        guard let name = userNameText  else {
+            return
+        }
+        
+        guard let imageUrl = imageUrl else {
+            return
+        }
+        let documentData = ["name": name , "uid": uid, "imageUrl": imageUrl ]
+        Firestore.firestore().collection("user").addDocument(data: documentData) { (error) in
+            guard error == nil else {
+                completion(error)
+                return
+            }
+            
+            print("success")
+            completion(nil)
+        }
+        
+        
+    }
+    
     func updateUserInformation (_ textString: String?, textFieldType: TextFieldType){
         switch textFieldType {
         case .userName:
@@ -70,9 +96,9 @@ class RegistrationManager {
     }
     
     func updateData(){
-//        let imageData = imageBindable.value
-//        let isUsername = userNameText?.isEmpty
-         isDataValid = emailText?.isEmpty == false && passwordText?.isEmpty == false
+        let imageData = imageBindable.value
+        let isUsername = userNameText?.isEmpty
+         isDataValid = emailText?.isEmpty == false && passwordText?.isEmpty == false && isUsername == false && imageData != nil
         isFormValidBindable.value = isDataValid
     }
     

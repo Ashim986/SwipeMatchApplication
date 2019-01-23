@@ -1,5 +1,5 @@
 //
-//  AddImageDataToFirebaseStorage.swift
+//  SaveImageToFirebase.swift
 //  SwipeMatchApplication
 //
 //  Created by ashim dahal on 1/19/19.
@@ -9,24 +9,33 @@
 import Foundation
 import Firebase
 
-struct AddImageDataToFirebaseStorage {
+struct SaveImageToFirebase {
     
-    static private var initialFetchCompletion: ((URL?, ServiceError?, Error?) -> Void)?
+    static private var initialFetchCompletion: ((URL?, Error?) -> Void)?
     static private var requestQueue = OperationQueue()
     static private var isLoginValid: Bool?
-    
-    static func userData(with email: String?, _ password: String?, _ imageData: Data?, and fileName: String, completion: @escaping(URL?, ServiceError?, Error?) ->Void) {
+    static private var filename: String?
+    static private var imageData: Data?
+    static private var error: Error?
+    static func userData(with email: String?, _ password: String?, _ imageData: Data?, and fileName: String?, completion: @escaping (URL?, Error?) -> Void ) {
         
         initialFetchCompletion = completion
         
+        self.filename = fileName
+        self.imageData = imageData
+        
         let completionOperation = BlockOperation {
-            putImageData(with: imageData, filename: fileName)
+            if isLoginValid == true {
+                putImageData()
+            } else {
+                initialFetchCompletion = nil
+            }
         }
         var authOperation = [Operation]()
-        
-        let userAuthOperation =  UserAuthorizationOperation(with: email, password: password) { (result, serviceErrorType, error) in
+        let userAuthOperation =  UserAuthorizationOperation(with: email, password: password) {(result, error) in
             guard error == nil else {
                 self.isLoginValid = false
+                initialFetchCompletion?(nil, error)
                 return
             }
             self.isLoginValid = true
@@ -38,55 +47,48 @@ struct AddImageDataToFirebaseStorage {
         requestQueue.addOperations(authOperation, waitUntilFinished: false)
     }
     
-    private static func putImageData(with imageData: Data?, filename: String?) {
+    private static func putImageData() {
         guard let completion = initialFetchCompletion else {
             return
         }
         let completionOperation = BlockOperation {
-           downloadURL(filename: filename)
+            downloadURL()
         }
         var imageDataOperation = [Operation]()
-        let addImageDataOperation = AddImageDataOperation(with: imageData, filename: filename) { (metadata, errorType ,error) in
-                guard error == nil, let errorType = errorType else {
-                    return
-                }
-            if errorType == .invalidRequestData {
-               completion(nil, errorType, nil)
-               return
+        let addImageDataOperation = AddImageDataOperation(with: imageData, filename: filename) { (metadata, error) in
+            guard error == nil else {
+                completion(nil, error)
+                return
             }
         }
         imageDataOperation.append(addImageDataOperation)
         completionOperation.addDependency(addImageDataOperation)
-
+        
         imageDataOperation.append(completionOperation)
         requestQueue.addOperations(imageDataOperation, waitUntilFinished: false)
-
+        
     }
     
-    private static func downloadURL(filename: String?) {
+    private static func downloadURL() {
         guard let completion = initialFetchCompletion else {
             return
         }
-
         let completionOperation = BlockOperation {
-           initialFetchCompletion = nil
+            initialFetchCompletion = nil
         }
         var downloadOperation = [Operation]()
-        let downloadURLOperation = DownloadURLOperation(with: filename) { (url, errorType, error) in
+        let downloadURLOperation = DownloadURLOperation(with: filename) { (url, error) in
             guard let url = url, error == nil else {
-                completion(nil, errorType ,error)
+                self.error = error
+                completion(nil ,error)
                 return
             }
-            if self.isLoginValid == true {
-                completion(url, nil, nil)
-            } else {
-                completion(nil, ServiceError.authenticationFailed, nil)
-            }
+            completion(url, nil)
         }
-
+        
         downloadOperation.append(downloadURLOperation)
         completionOperation.addDependency(downloadURLOperation)
-
+        
         downloadOperation.append(completionOperation)
         requestQueue.addOperations(downloadOperation, waitUntilFinished: false)
     }
