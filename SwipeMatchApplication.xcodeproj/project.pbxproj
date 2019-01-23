@@ -37,6 +37,7 @@
 		C5B1F6CA21F7DAD900CB305F /* Extension+JGProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6C921F7DAD900CB305F /* Extension+JGProgressHUD.swift */; };
 		C5B1F6D121F8366C00CB305F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6D021F8366C00CB305F /* SettingViewController.swift */; };
 		C5B1F6D321F8367300CB305F /* SettingViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6D221F8367300CB305F /* SettingViewManager.swift */; };
+		C5B1F6D521F83BEC00CB305F /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B1F6D421F83BEC00CB305F /* SettingHeaderView.swift */; };
 		F61A73C5F247E2B3C0F77208 /* Pods_SwipeMatchApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		C5B1F6C921F7DAD900CB305F /* Extension+JGProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+JGProgressHUD.swift"; sourceTree = "<group>"; };
 		C5B1F6D021F8366C00CB305F /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		C5B1F6D221F8367300CB305F /* SettingViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewManager.swift; sourceTree = "<group>"; };
+		C5B1F6D421F83BEC00CB305F /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		EA3D6A0239C807C4B17CB9AC /* Pods-SwipeMatchApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchApplication.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchApplication/Pods-SwipeMatchApplication.release.xcconfig"; sourceTree = "<group>"; };
 		F859EF14E3229849FFEF4A6F /* Pods_SwipeMatchApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -302,6 +304,7 @@
 			children = (
 				C5B1F6D021F8366C00CB305F /* SettingViewController.swift */,
 				C5B1F6D221F8367300CB305F /* SettingViewManager.swift */,
+				C5B1F6D421F83BEC00CB305F /* SettingHeaderView.swift */,
 			);
 			path = SettingController;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				C5B1F6C521F78DC600CB305F /* SaveImageToFirebase.swift in Sources */,
 				C509013C21EC55F400A4CF02 /* RegistrationManager.swift in Sources */,
 				C593152D21C8CC0A002F9776 /* AppDelegate.swift in Sources */,
+				C5B1F6D521F83BEC00CB305F /* SettingHeaderView.swift in Sources */,
 				C5B1F6D321F8367300CB305F /* SettingViewManager.swift in Sources */,
 				C55913F321D9D18F00DC3049 /* HomeViewManager.swift in Sources */,
 				C55913F921DAC45000DC3049 /* Advertise.swift in Sources */,

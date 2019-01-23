@@ -15,7 +15,7 @@ protocol BottomControlStackViewDelegate: class {
 class BottomControlStackView: UIStackView {
     weak var delegate: BottomControlStackViewDelegate?
     
-   private static func createButton(image: UIImage) -> UIButton {
+   private func createButton(image: UIImage) -> UIButton {
         
         let button = UIButton(type: .system)
         button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -24,16 +24,16 @@ class BottomControlStackView: UIStackView {
         return button
     }
     
-    private let refreshButton: UIButton = {
+    private lazy var refreshButton: UIButton = {
        let button = createButton(image: #imageLiteral(resourceName: "refresh_circle"))
         button.addTarget(self, action: #selector(handleRefreshAction), for: .touchUpInside )
         return button
     }()
     
-    private let likeButton = createButton(image: #imageLiteral(resourceName: "like_circle"))
-    private let superLikeButton = createButton(image: #imageLiteral(resourceName: "super_like_circle"))
-    private let dislikeButton = createButton(image: #imageLiteral(resourceName: "dismiss_circle"))
-    private let flashButton = createButton(image: #imageLiteral(resourceName: "boost_circle"))
+    private lazy var likeButton = createButton(image: #imageLiteral(resourceName: "like_circle"))
+    private lazy var superLikeButton = createButton(image: #imageLiteral(resourceName: "super_like_circle"))
+    private lazy var dislikeButton = createButton(image: #imageLiteral(resourceName: "dismiss_circle"))
+    private lazy var flashButton = createButton(image: #imageLiteral(resourceName: "boost_circle"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)

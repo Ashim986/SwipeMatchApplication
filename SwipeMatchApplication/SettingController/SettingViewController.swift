@@ -47,4 +47,39 @@ class SettingViewController: UITableViewController {
     
     // MARK: - seutp tableView
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = SettingHeaderView()
+        headerView.delegate = self
+        return headerView
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 300
+    }
+    
+}
+
+extension SettingViewController: SettingHeaderViewDelegate {
+    func didSelectPhoto(button: UIButton) {
+        let imagePicker = SettingImagePickerController()
+        imagePicker.imageButton = button
+        imagePicker.delegate = self
+        present(imagePicker, animated:  true)
+    }
+}
+
+extension SettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info[.originalImage] as? UIImage
+        let imageButton = (picker as? SettingImagePickerController)?.imageButton
+        imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true, completion: nil)
+        
+    }
+}
+
+
+class SettingImagePickerController: UIImagePickerController {
+    var imageButton = UIButton()
 }
